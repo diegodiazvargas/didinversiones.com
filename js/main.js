@@ -24,6 +24,32 @@
     });
   }
 
+  /* ---------- Tabs de aliados (inmobiliarias / bancos / mutuarias) ---------- */
+  var alliesTabs = document.querySelectorAll(".allies-tab");
+  var alliesPanels = document.querySelectorAll(".allies-panel");
+
+  alliesTabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      alliesTabs.forEach(function (t) {
+        t.classList.remove("is-active");
+        t.setAttribute("aria-selected", "false");
+      });
+      alliesPanels.forEach(function (panel) {
+        panel.classList.remove("is-active");
+        panel.hidden = true;
+      });
+
+      tab.classList.add("is-active");
+      tab.setAttribute("aria-selected", "true");
+
+      var target = document.getElementById("panel-" + tab.getAttribute("data-tab"));
+      if (target) {
+        target.classList.add("is-active");
+        target.hidden = false;
+      }
+    });
+  });
+
   /* ---------- Año dinámico en el footer ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
