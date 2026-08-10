@@ -10,12 +10,12 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: var(--black);
+  background: var(--navy);
   color: var(--cream);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 16px 32px -12px rgba(13, 13, 13, 0.5);
+  box-shadow: 0 16px 32px -12px rgba(16, 42, 87, 0.5);
   transition: transform 0.2s ease;
 }
 .chat-launcher:hover { transform: scale(1.06); }
@@ -44,7 +44,7 @@
   height: min(560px, calc(100vh - 140px));
   background: var(--cream);
   border-radius: var(--radius-lg);
-  box-shadow: 0 30px 60px -20px rgba(13, 13, 13, 0.45);
+  box-shadow: 0 30px 60px -20px rgba(16, 42, 87, 0.45);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -61,7 +61,7 @@
 }
 
 .chat-header {
-  background: var(--black);
+  background: var(--navy);
   color: var(--cream);
   padding: 18px 20px;
   display: flex;
@@ -79,12 +79,12 @@
   justify-content: center;
   flex-shrink: 0;
 }
-.chat-header .avatar svg { width: 20px; height: 20px; color: var(--black); }
+.chat-header .avatar svg { width: 20px; height: 20px; color: var(--navy); }
 
 .chat-header .name { font-weight: 700; font-size: 0.98rem; }
 .chat-header .status {
   font-size: 0.76rem;
-  color: rgba(247, 242, 230, 0.62);
+  color: rgba(250, 248, 243, 0.62);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -123,7 +123,7 @@
 
 .chat-msg--user {
   align-self: flex-end;
-  background: var(--black);
+  background: var(--navy);
   color: var(--cream);
   border-bottom-right-radius: 4px;
 }
@@ -155,7 +155,7 @@
 .chat-typing span {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--ink-50);
+  background: var(--gray-soft);
   animation: chat-typing 1.2s infinite ease-in-out;
 }
 .chat-typing span:nth-child(2) { animation-delay: 0.15s; }
@@ -189,7 +189,7 @@
   height: 40px;
   border-radius: 50%;
   background: var(--gold);
-  color: var(--black);
+  color: var(--navy);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -200,7 +200,7 @@
 
 .chat-disclaimer {
   font-size: 0.68rem;
-  color: var(--ink-50);
+  color: var(--gray-soft);
   text-align: center;
   padding: 0 14px 12px;
 }
