@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+  command = "echo 'Sitio estático — sin build step'"
+
+[functions]
+  node_bundler = "esbuild"

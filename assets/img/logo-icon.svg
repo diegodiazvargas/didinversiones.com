@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130" role="img" aria-label="DIDI Inversiones">
+  <!-- Isotipo DIDI Inversiones: reconstrucción vectorial a partir del logo original (pie de firma corporativo).
+       "D" en forma de torre: espina recta + bowl curvo abierto, con 3 líneas de piso y un punto dorado de inversión. -->
+  <path d="M8 8 L8 122" fill="none" stroke="#0d0d0d" stroke-width="9" stroke-linecap="round"/>
+  <path d="M8 8 C56 8 83 34 83 65 C83 96 56 122 8 122" fill="none" stroke="#0d0d0d" stroke-width="9" stroke-linecap="round"/>
+  <line x1="15" y1="38" x2="60" y2="38" stroke="#c9982f" stroke-width="5" stroke-linecap="round"/>
+  <line x1="15" y1="65" x2="60" y2="65" stroke="#c9982f" stroke-width="5" stroke-linecap="round"/>
+  <line x1="15" y1="92" x2="60" y2="92" stroke="#c9982f" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="85" cy="14" r="8" fill="#c9982f"/>
+  <rect x="1" y="126" width="76" height="6" rx="3" fill="#c9982f"/>
+</svg>

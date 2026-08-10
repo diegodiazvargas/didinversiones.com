@@ -1,0 +1,9 @@
+{
+  "name": "didi-inversiones-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio web de DIDI Inversiones (HTML/CSS/JS estático + función Netlify para el chatbot).",
+  "engines": {
+    "node": ">=18"
+  }
+}
