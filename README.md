@@ -57,17 +57,17 @@ Buscar el comentario `PENDIENTE` en los archivos para ubicar rápidamente cada u
 
 | Dónde | Qué falta |
 |---|---|
-| `assets/img/logo-icon.svg` | Es una **reconstrucción vectorial** hecha a partir del logo en baja resolución encontrado en las firmas de correo (`Pie_de_Firma_*.png`). Si aparece el archivo original en alta resolución o vectorial (SVG/AI/PDF), reemplazar este archivo. |
+| `assets/img/logo-icon.svg` | Es una **reconstrucción vectorial** hecha a partir del logo en baja resolución encontrado en las firmas de correo (`Pie_de_Firma_*.png`). Si aparece el archivo original en alta resolución o vectorial (SVG/AI/PDF), reemplazar este archivo (y `logo-icon-on-dark.svg`, su variante para fondos oscuros). |
 | `index.html` → hero | Reemplazar la tarjeta "Depto 2D/2B · Ñuñoa" por una foto real de un proyecto destacado. |
-| `index.html` → sección Aliados | Los `ally-chip` son texto plano; reemplazar por logos reales (PNG/SVG) de cada inmobiliaria, banco y mutuaria cuando estén disponibles (están en Drive según lo conversado). |
-| `index.html` → Cómo funciona | Las dos "herramientas propias" (calculadora de capacidad hipotecaria, mapa interactivo por comuna) están como tarjetas "Próximamente" — falta implementar su lógica funcional. |
+| `index.html` → sección Aliados | Los `ally-name` son texto plano; reemplazar por logos reales (PNG/SVG) de cada inmobiliaria, banco y mutuaria cuando estén disponibles (están en Drive según lo conversado). |
 | `index.html` → Testimonios | Son placeholders (`[PLACEHOLDER]`) — reemplazar por testimonios reales (nombre, cargo, frase). |
 | `index.html` → footer | Confirmar si aplica una dirección/comuna exacta de oficina (hoy solo dice "Santiago, Chile"). |
 | `netlify/functions/chat.js` | Requiere `ANTHROPIC_API_KEY` configurada en Netlify (ver arriba) para funcionar. |
 
 ## Notas de diseño
 
-- Colores: negro `#0d0d0d`, dorado `#c9982f`, crema `#f7f2e6` (variables CSS en `css/style.css`).
+- Colores: azul marino `#102A57` (texto principal, CTA, marca), dorado `#C4953C` (acento: íconos, subtítulos, hover), fondo blanco/crema `#FFFFFF` / `#FAF8F3`, gris `#6E7580` (texto secundario) — variables CSS en `css/style.css`.
 - Tipografías: **Fraunces** (títulos/wordmark) + **Hanken Grotesk** (texto), cargadas desde Google Fonts.
 - Mobile-first: gran parte del tráfico esperado llega desde Meta Ads → WhatsApp.
 - Referencia de diseño/estructura: [inviertepro.cl](https://inviertepro.cl).
+- Razón social (holding): **DIDICAPITALS SPA** — usada en el pie de página. "DIDI Inversiones" es el nombre comercial/marca.

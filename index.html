@@ -32,6 +32,7 @@
     </a>
 
     <div class="nav-links">
+      <a href="#especializacion">Especialización</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#aliados">Aliados</a>
       <a href="#testimonios">Testimonios</a>
@@ -49,6 +50,7 @@
   </nav>
 
   <div class="mobile-menu container" id="mobileMenu">
+    <a href="#especializacion">Especialización</a>
     <a href="#como-funciona">Cómo funciona</a>
     <a href="#aliados">Aliados</a>
     <a href="#testimonios">Testimonios</a>
@@ -111,9 +113,51 @@
     </div>
   </section>
 
+  <!-- ============ ESPECIALIZACIÓN (nicho: alto patrimonio) ============ -->
+  <section class="section" id="especializacion">
+    <div class="container">
+      <div class="specialty-head" data-reveal>
+        <span class="eyebrow">Nuestra especialidad</span>
+        <h2>Nos especializamos en construir carteras de inversión inmobiliaria de <span class="accent">alto patrimonio</span>.</h2>
+        <p>Estructuramos cada inversión pensando en maximizar tu rentabilidad y minimizar tu carga tributaria, con herramientas que muchos inversionistas no conocen.</p>
+      </div>
+
+      <div class="specialty-grid" data-reveal>
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V10l7-6 7 6v11"/><path d="m4 9 8-6 8 6" stroke-dasharray="3 3"/></svg>
+          </div>
+          <h3>Inversión sin pie</h3>
+          <p>Estructuras de financiamiento pensadas para partir sin desembolso inicial.</p>
+        </div>
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/></svg>
+          </div>
+          <h3>Multicréditos</h3>
+          <p>Combinamos más de un crédito hipotecario para ampliar tu capacidad de inversión.</p>
+        </div>
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Beneficios tributarios</h3>
+          <p>Aprovechamos los mecanismos legales que reducen tu carga de impuestos.</p>
+        </div>
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 15.4-6.4L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.4 6.4L3 16"/><path d="M3 21v-5h5"/></svg>
+          </div>
+          <h3>Recupero de IVA</h3>
+          <p>Te asesoramos para recuperar el IVA cuando tu inversión lo permite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ 3. ALIADOS (inmobiliarias / bancos / mutuarias) ============ -->
   <!-- PENDIENTE: reemplazar los "ally-name" de texto por logos reales (PNG/SVG) de cada inmobiliaria/banco/mutuaria -->
-  <section class="section" id="aliados">
+  <section class="section section--tint" id="aliados">
     <div class="container">
       <div class="section-head section-head--center" data-reveal>
         <h2 class="allies-heading">Trabajamos con las mejores inmobiliarias, bancos y mutuarias de Chile</h2>
@@ -126,27 +170,36 @@
       </div>
 
       <div class="allies-panel is-active" id="panel-inmobiliarias" data-panel="inmobiliarias" role="tabpanel">
-        <div class="allies-row">
-          <span class="ally-name">Imagina</span><span class="ally-name">Fai</span><span class="ally-name">Simonetti</span><span class="ally-name">Deisa</span><span class="ally-name">Euro</span><span class="ally-name">Norte Verde</span><span class="ally-name">Delabase</span><span class="ally-name">Siena</span><span class="ally-name">Castro Y Tagle</span><span class="ally-name">Almazara</span><span class="ally-name">Fundamenta</span>
+        <div class="marquee">
+          <div class="marquee-track">
+            <span class="ally-name">Imagina</span><span class="ally-name">Fai</span><span class="ally-name">Simonetti</span><span class="ally-name">Deisa</span><span class="ally-name">Euro</span><span class="ally-name">Norte Verde</span><span class="ally-name">Delabase</span><span class="ally-name">Siena</span><span class="ally-name">Castro Y Tagle</span><span class="ally-name">Almazara</span><span class="ally-name">Fundamenta</span>
+            <span class="ally-name" aria-hidden="true">Imagina</span><span class="ally-name" aria-hidden="true">Fai</span><span class="ally-name" aria-hidden="true">Simonetti</span><span class="ally-name" aria-hidden="true">Deisa</span><span class="ally-name" aria-hidden="true">Euro</span><span class="ally-name" aria-hidden="true">Norte Verde</span><span class="ally-name" aria-hidden="true">Delabase</span><span class="ally-name" aria-hidden="true">Siena</span><span class="ally-name" aria-hidden="true">Castro Y Tagle</span><span class="ally-name" aria-hidden="true">Almazara</span><span class="ally-name" aria-hidden="true">Fundamenta</span>
+          </div>
         </div>
       </div>
 
       <div class="allies-panel" id="panel-bancos" data-panel="bancos" role="tabpanel" hidden>
-        <div class="allies-row">
-          <span class="ally-name">Santander</span><span class="ally-name">BCI</span><span class="ally-name">Itaú</span><span class="ally-name">Banco de Chile</span><span class="ally-name">Consorcio</span><span class="ally-name">Coopeuch</span><span class="ally-name">Banco Estado</span><span class="ally-name">Bice</span>
+        <div class="marquee">
+          <div class="marquee-track">
+            <span class="ally-name">Santander</span><span class="ally-name">BCI</span><span class="ally-name">Itaú</span><span class="ally-name">Banco de Chile</span><span class="ally-name">Consorcio</span><span class="ally-name">Coopeuch</span><span class="ally-name">Banco Estado</span><span class="ally-name">Bice</span>
+            <span class="ally-name" aria-hidden="true">Santander</span><span class="ally-name" aria-hidden="true">BCI</span><span class="ally-name" aria-hidden="true">Itaú</span><span class="ally-name" aria-hidden="true">Banco de Chile</span><span class="ally-name" aria-hidden="true">Consorcio</span><span class="ally-name" aria-hidden="true">Coopeuch</span><span class="ally-name" aria-hidden="true">Banco Estado</span><span class="ally-name" aria-hidden="true">Bice</span>
+          </div>
         </div>
       </div>
 
       <div class="allies-panel" id="panel-mutuarias" data-panel="mutuarias" role="tabpanel" hidden>
-        <div class="allies-row">
-          <span class="ally-name">Bice Hipotecaria</span><span class="ally-name">Metlife</span><span class="ally-name">Evoluciona</span><span class="ally-name">Principal</span><span class="ally-name">Renta Nacional</span>
+        <div class="marquee">
+          <div class="marquee-track">
+            <span class="ally-name">Bice Hipotecaria</span><span class="ally-name">Metlife</span><span class="ally-name">Evoluciona</span><span class="ally-name">Principal</span><span class="ally-name">Renta Nacional</span>
+            <span class="ally-name" aria-hidden="true">Bice Hipotecaria</span><span class="ally-name" aria-hidden="true">Metlife</span><span class="ally-name" aria-hidden="true">Evoluciona</span><span class="ally-name" aria-hidden="true">Principal</span><span class="ally-name" aria-hidden="true">Renta Nacional</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ 4. CÓMO FUNCIONA ============ -->
-  <section class="section section--dark" id="como-funciona">
+  <section class="section" id="como-funciona">
     <div class="container">
       <div class="section-head" data-reveal>
         <span class="eyebrow">Proceso</span>
@@ -168,38 +221,17 @@
         <div class="process-step">
           <div class="step-number">03</div>
           <h3>Gestión de crédito hipotecario</h3>
-          <p>Convenios con Evoluciona y Bice Hipotecaria para financiar en las mejores condiciones.</p>
+          <p>Tenemos convenios con todos los bancos y mutuarias para financiar en las mejores condiciones.</p>
         </div>
         <div class="process-step">
           <div class="step-number">04</div>
           <h3>Firma de promesa y escrituración</h3>
-          <p>Te acompañamos en cada trámite legal, sin sorpresas ni letra chica.</p>
+          <p>Te acompañamos en todo el trámite legal, aprovechando los beneficios tributarios.</p>
         </div>
         <div class="process-step">
           <div class="step-number">05</div>
           <h3>Entrega y arriendo</h3>
-          <p>Coordinamos la recepción de tu propiedad y su puesta en arriendo.</p>
-        </div>
-      </div>
-
-      <div class="tools-grid" data-reveal>
-        <!-- PENDIENTE: implementar calculadora funcional (inputs: ahorro, renta, tasa → capacidad de crédito) -->
-        <div class="tool-card">
-          <div class="tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
-          </div>
-          <h3>Calculadora de capacidad hipotecaria</h3>
-          <p>Simula en segundos cuánto podrías invertir según tu ahorro y renta actual.</p>
-          <span class="tool-tag">Próximamente</span>
-        </div>
-        <!-- PENDIENTE: implementar mapa interactivo (Metro, UF/m² por comuna) -->
-        <div class="tool-card">
-          <div class="tool-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-6-3V4l6 3 6-3 6 3v13l-6-3-6 3z"/><path d="M9 7v13M15 4v13"/></svg>
-          </div>
-          <h3>Mapa interactivo de inversión</h3>
-          <p>Explora valores UF/m² y cercanía al Metro por comuna, antes de decidir dónde invertir.</p>
-          <span class="tool-tag">Próximamente</span>
+          <p>Te acompañamos a la entrega de tu departamento y lo ponemos en arriendo.</p>
         </div>
       </div>
     </div>
@@ -257,7 +289,7 @@
     <div class="container">
       <div class="cta-band" data-reveal>
         <h2>¿Listo para que tu plata empiece a trabajar?</h2>
-        <a class="btn btn--accent" href="https://calendly.com/diegodiaz-didinversiones/inversion-inmobiliaria" target="_blank" rel="noopener">
+        <a class="btn btn--primary" href="https://calendly.com/diegodiaz-didinversiones/inversion-inmobiliaria" target="_blank" rel="noopener">
           Agenda tu asesoría gratuita
         </a>
       </div>
@@ -272,7 +304,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#top" class="logo">
-          <img src="assets/img/logo-icon-on-dark.svg" alt="" class="logo-icon" width="28" height="36">
+          <img src="assets/img/logo-icon.svg" alt="" class="logo-icon" width="28" height="36">
           <span class="logo-text">
             <span class="logo-word">DIDI<span class="dot">.</span></span>
             <span class="logo-sub">Inversiones</span>
@@ -295,6 +327,7 @@
       <div class="footer-col">
         <h4>Navegación</h4>
         <ul>
+          <li><a href="#especializacion">Especialización</a></li>
           <li><a href="#como-funciona">Cómo funciona</a></li>
           <li><a href="#aliados">Aliados</a></li>
           <li><a href="#testimonios">Testimonios</a></li>
@@ -332,7 +365,7 @@
     </div>
 
     <div class="footer-bottom">
-      <span>© <span id="year">2026</span> DIDI Inversiones SpA. Todos los derechos reservados.</span>
+      <span>© <span id="year">2026</span> DIDICAPITALS SPA. Todos los derechos reservados.</span>
       <span>Bróker inmobiliario independiente · No constituye asesoría financiera regulada.</span>
     </div>
   </div>
