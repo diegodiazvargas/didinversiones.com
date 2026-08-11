@@ -88,7 +88,8 @@ h1, h2, h3, h4 {
 
 .section-head {
   max-width: 640px;
-  margin-bottom: 40px;
+  margin: 0 auto 40px;
+  text-align: center;
 }
 
 .section-head h2 {
@@ -358,7 +359,11 @@ h1, h2, h3, h4 {
 }
 
 /* ---------- Especialización (nicho) ---------- */
-.specialty-head { max-width: 720px; }
+.specialty-head {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
 
 .specialty-head h2 .accent {
   color: var(--gold-dark);
@@ -366,7 +371,7 @@ h1, h2, h3, h4 {
 }
 
 .specialty-head p {
-  margin-top: 16px;
+  margin: 16px auto 0;
   font-size: 1.05rem;
   color: var(--gray);
   max-width: 56ch;
@@ -413,11 +418,6 @@ h1, h2, h3, h4 {
 .specialty-card p { margin-top: 8px; font-size: 0.88rem; color: var(--gray); }
 
 /* ---------- Aliados (logos) ---------- */
-.section-head--center {
-  margin-inline: auto;
-  text-align: center;
-}
-
 .allies-heading {
   font-family: var(--font-body);
   font-size: 0.82rem;
@@ -457,6 +457,12 @@ h1, h2, h3, h4 {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Inmobiliarias y bancos parten corridos hacia la derecha para que el primer
+   nombre (el más relevante) no quede pegado al borde difuminado del marquee */
+.marquee-track--offset {
+  padding-left: 168px;
 }
 
 .marquee-track {
