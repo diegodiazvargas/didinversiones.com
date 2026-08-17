@@ -663,6 +663,9 @@ h1, h2, h3, h4 {
 /* Un par de logos (Siena, Delabase) son blancos puros — necesitan fondo oscuro para verse */
 .ally-logo--dark { background: var(--navy); }
 
+/* Inmobiliarias: todas en tarjeta navy (a pedido de Diego) — bancos y mutuarias se quedan en blanco */
+#panel-inmobiliarias .ally-logo { background: var(--navy); }
+
 /* ---------- Cómo funciona (timeline horizontal en desktop) ---------- */
 .process {
   position: relative;
