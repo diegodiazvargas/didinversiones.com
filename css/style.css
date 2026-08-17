@@ -645,8 +645,8 @@ h1, h2, h3, h4 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 64px;
-  padding: 0 26px;
+  height: 80px;
+  padding: 0 30px;
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -654,17 +654,19 @@ h1, h2, h3, h4 {
 }
 
 .ally-logo img {
-  max-height: 32px;
-  max-width: 150px;
+  max-height: 46px;
+  max-width: 170px;
   width: auto;
   object-fit: contain;
 }
 
+/* Logos cuadrados/tipo ícono (ej. Imagina) quedan chicos con el mismo max-height
+   que los wordmark anchos — se les da un poco más de aire para que se vean
+   igual de grandes que el resto */
+.ally-logo--square img { max-height: 56px; max-width: 56px; }
+
 /* Un par de logos (Siena, Delabase) son blancos puros — necesitan fondo oscuro para verse */
 .ally-logo--dark { background: var(--navy); }
-
-/* Inmobiliarias: todas en tarjeta navy (a pedido de Diego) — bancos y mutuarias se quedan en blanco */
-#panel-inmobiliarias .ally-logo { background: var(--navy); }
 
 /* ---------- Cómo funciona (timeline horizontal en desktop) ---------- */
 .process {
