@@ -56,6 +56,8 @@
     var ufValEl = document.getElementById("sim-uf-val");
     var termBtns = document.querySelectorAll(".sim-term-btn");
     var fogaesToggle = document.getElementById("sim-fogaes");
+    var fogaesLabel = document.getElementById("sim-fogaes-label");
+    var fogaesNote = document.getElementById("sim-fogaes-note");
     var divValEl = document.getElementById("sim-div-val");
     var detailEl = document.getElementById("sim-detail");
 
@@ -64,6 +66,12 @@
     // Valor UF de respaldo por si falla la API (actualizar si queda muy desfasado)
     var UF_CLP = 40850;
     var years = 30;
+
+    // FOGAES: garantía estatal que sube el financiamiento de 80% a 90% y
+    // subsidia la tasa (4% -> 3,2%). Solo aplica a propiedades hasta UF 6.000.
+    var FOGAES_MAX_UF = 6000;
+    var FOGAES_NOTE_DEFAULT = fogaesNote ? fogaesNote.textContent : "";
+    var FOGAES_NOTE_BLOCKED = "No disponible para propiedades sobre UF 6.000 — el tope de FOGAES.";
 
     // Trae el valor UF del día desde una API pública chilena, así el cálculo
     // nunca queda desactualizado sin depender de tocar el código.
@@ -87,8 +95,15 @@
       var ufAmount = parseInt(ufInput.value, 10);
       ufValEl.textContent = "UF " + fmt(ufAmount);
 
-      var withFogaes = fogaesToggle.checked;
-      var financingPct = withFogaes ? 0.9 : 1;
+      // Sobre el tope, FOGAES no aplica: se bloquea el toggle y se desmarca solo.
+      var overFogaesLimit = ufAmount > FOGAES_MAX_UF;
+      fogaesToggle.disabled = overFogaesLimit;
+      if (overFogaesLimit) fogaesToggle.checked = false;
+      if (fogaesLabel) fogaesLabel.classList.toggle("is-disabled", overFogaesLimit);
+      if (fogaesNote) fogaesNote.textContent = overFogaesLimit ? FOGAES_NOTE_BLOCKED : FOGAES_NOTE_DEFAULT;
+
+      var withFogaes = fogaesToggle.checked && !overFogaesLimit;
+      var financingPct = withFogaes ? 0.9 : 0.8;
       var annualRate = withFogaes ? 0.032 : 0.04;
       var monthlyRate = annualRate / 12;
       var months = years * 12;

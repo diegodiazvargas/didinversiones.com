@@ -534,6 +534,11 @@ h1, h2, h3, h4 {
 .sim-toggle-copy { font-size: 0.88rem; color: var(--gray); display: flex; flex-direction: column; gap: 2px; }
 .sim-toggle-copy strong { color: var(--navy); font-size: 0.92rem; }
 
+.sim-toggle.is-disabled { cursor: not-allowed; }
+.sim-toggle.is-disabled .sim-toggle-track { opacity: 0.5; }
+.sim-toggle.is-disabled .sim-toggle-copy strong { color: var(--gray); }
+.sim-toggle.is-disabled .sim-toggle-copy small { color: var(--gold-dark); }
+
 .simulator-result {
   background: var(--navy);
   color: var(--cream);
