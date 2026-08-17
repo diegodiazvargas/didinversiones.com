@@ -50,6 +50,77 @@
     });
   });
 
+  /* ---------- Simulador de crédito ---------- */
+  (function () {
+    var ufInput = document.getElementById("sim-uf");
+    var ufValEl = document.getElementById("sim-uf-val");
+    var termBtns = document.querySelectorAll(".sim-term-btn");
+    var fogaesToggle = document.getElementById("sim-fogaes");
+    var divValEl = document.getElementById("sim-div-val");
+    var detailEl = document.getElementById("sim-detail");
+
+    if (!ufInput || !divValEl) return;
+
+    // Valor UF de respaldo por si falla la API (actualizar si queda muy desfasado)
+    var UF_CLP = 40850;
+    var years = 30;
+
+    // Trae el valor UF del día desde una API pública chilena, así el cálculo
+    // nunca queda desactualizado sin depender de tocar el código.
+    fetch("https://mindicador.cl/api/uf")
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.serie && data.serie[0] && data.serie[0].valor) {
+          UF_CLP = data.serie[0].valor;
+          update();
+        }
+      })
+      .catch(function () {
+        /* sin conexión a la API: se usa el valor de respaldo */
+      });
+
+    function fmt(n) {
+      return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function update() {
+      var ufAmount = parseInt(ufInput.value, 10);
+      ufValEl.textContent = "UF " + fmt(ufAmount);
+
+      var withFogaes = fogaesToggle.checked;
+      var financingPct = withFogaes ? 0.9 : 1;
+      var annualRate = withFogaes ? 0.032 : 0.04;
+      var monthlyRate = annualRate / 12;
+      var months = years * 12;
+
+      var principalCLP = ufAmount * financingPct * UF_CLP;
+      var payment = (principalCLP * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+
+      var ratePct = (annualRate * 100).toFixed(1).replace(".", ",");
+      divValEl.textContent = "$ " + fmt(payment);
+      detailEl.textContent =
+        "Financiamiento " + Math.round(financingPct * 100) + "% · tasa " +
+        ratePct + "% anual · " + years + " años";
+    }
+
+    ufInput.addEventListener("input", update);
+    fogaesToggle.addEventListener("change", update);
+    termBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        termBtns.forEach(function (b) {
+          b.classList.remove("is-active");
+          b.setAttribute("aria-pressed", "false");
+        });
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-pressed", "true");
+        years = parseInt(btn.getAttribute("data-years"), 10);
+        update();
+      });
+    });
+
+    update();
+  })();
+
   /* ---------- Año dinámico en el footer ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

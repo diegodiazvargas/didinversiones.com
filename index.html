@@ -90,7 +90,7 @@
           Agenda tu asesoría gratuita
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="btn btn--outline" href="#como-funciona">
+        <a class="btn btn--outline" href="#simulador">
           Simula tu crédito
         </a>
       </div>
@@ -100,6 +100,55 @@
         <span><strong>+250 casos de éxito</strong> ya construyen su patrimonio con nosotros</span>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ============ SIMULADOR DE CRÉDITO ============ -->
+  <section class="section section--tint" id="simulador">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Simulador</span>
+        <h2>¿Cuánto necesitas para partir?</h2>
+        <p>Estimación referencial de tu dividendo mensual. Ajusta el valor de la propiedad, el plazo, y revisa cómo cambia si cuentas con FOGAES.</p>
+      </div>
+
+      <div class="simulator-card" data-reveal>
+        <div class="simulator-inputs">
+          <div class="sim-field">
+            <div class="sim-field-top">
+              <label for="sim-uf">Valor de la propiedad</label>
+              <span class="sim-field-value" id="sim-uf-val">UF 2.700</span>
+            </div>
+            <input type="range" id="sim-uf" min="1000" max="8000" step="50" value="2700" aria-label="Valor de la propiedad en UF">
+          </div>
+
+          <div class="sim-field">
+            <label>Plazo del crédito</label>
+            <div class="sim-term-group" role="group" aria-label="Plazo del crédito">
+              <button type="button" class="sim-term-btn" data-years="20" aria-pressed="false">20 años</button>
+              <button type="button" class="sim-term-btn" data-years="25" aria-pressed="false">25 años</button>
+              <button type="button" class="sim-term-btn is-active" data-years="30" aria-pressed="true">30 años</button>
+              <button type="button" class="sim-term-btn" data-years="40" aria-pressed="false">40 años</button>
+            </div>
+          </div>
+
+          <label class="sim-toggle">
+            <input type="checkbox" id="sim-fogaes">
+            <span class="sim-toggle-track" aria-hidden="true"><span class="sim-toggle-thumb"></span></span>
+            <span class="sim-toggle-copy">
+              <strong>Simular con FOGAES</strong>
+              <small>Financiamiento al 90% con tasa preferencial de 3,2%</small>
+            </span>
+          </label>
+        </div>
+
+        <div class="simulator-result">
+          <span class="sim-result-label">Dividendo mensual estimado</span>
+          <div class="sim-result-value" id="sim-div-val">$ 0</div>
+          <div class="sim-result-detail" id="sim-detail">Financiamiento 100% · tasa 4,0% anual · 30 años</div>
+          <p class="sim-disclaimer">Cálculo ilustrativo con fines de demostración de producto — no representa una proyección financiera real ni un compromiso de tasa. Usa el valor UF del día vía <a href="https://mindicador.cl" target="_blank" rel="noopener">mindicador.cl</a>.</p>
+        </div>
+      </div>
     </div>
   </section>
 

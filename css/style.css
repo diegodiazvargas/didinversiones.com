@@ -417,6 +417,161 @@ h1, h2, h3, h4 {
 .specialty-card h3 { font-size: 1.02rem; }
 .specialty-card p { margin-top: 8px; font-size: 0.88rem; color: var(--gray); }
 
+/* ---------- Simulador de crédito ---------- */
+.simulator-card {
+  margin-top: 40px;
+  display: grid;
+  gap: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+@media (min-width: 860px) {
+  .simulator-card { grid-template-columns: 1.1fr 0.9fr; }
+}
+
+.simulator-inputs {
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sim-field label,
+.sim-field > label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.sim-field-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sim-field-value {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--gold-dark);
+}
+
+.sim-field input[type="range"] {
+  width: 100%;
+  accent-color: var(--gold);
+}
+
+.sim-term-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.sim-term-btn {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  font-weight: 700;
+  font-size: 0.86rem;
+  color: var(--gray);
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.sim-term-btn:hover { border-color: var(--gold); }
+.sim-term-btn.is-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--cream);
+}
+
+.sim-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.sim-toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+
+.sim-toggle-track {
+  flex-shrink: 0;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--cream-dark);
+  border: 1px solid var(--border);
+  position: relative;
+  margin-top: 2px;
+  transition: background 0.15s ease;
+}
+.sim-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 1px 3px rgba(16, 42, 87, 0.3);
+  transition: transform 0.15s ease;
+}
+.sim-toggle input:checked + .sim-toggle-track {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.sim-toggle input:checked + .sim-toggle-track .sim-toggle-thumb {
+  transform: translateX(18px);
+}
+.sim-toggle input:focus-visible + .sim-toggle-track {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.sim-toggle-copy { font-size: 0.88rem; color: var(--gray); display: flex; flex-direction: column; gap: 2px; }
+.sim-toggle-copy strong { color: var(--navy); font-size: 0.92rem; }
+
+.simulator-result {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sim-result-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold-light);
+}
+
+.sim-result-value {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.sim-result-detail {
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: rgba(250, 248, 243, 0.7);
+}
+
+.sim-disclaimer {
+  margin-top: 20px;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(250, 248, 243, 0.55);
+}
+.sim-disclaimer a { color: var(--gold-light); text-decoration: underline; }
+
 /* ---------- Aliados (logos) ---------- */
 .allies-heading {
   font-family: var(--font-body);
