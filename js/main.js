@@ -136,6 +136,29 @@
     update();
   })();
 
+  /* ---------- Formulario de contacto (Netlify Forms) ---------- */
+  var contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var data = new FormData(contactForm);
+      var body = new URLSearchParams(data).toString();
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body,
+      })
+        .then(function () {
+          contactForm.classList.add("is-sent");
+        })
+        .catch(function () {
+          // Si falla el envío por fetch, se manda igual como formulario normal
+          contactForm.submit();
+        });
+    });
+  }
+
   /* ---------- Año dinámico en el footer ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
