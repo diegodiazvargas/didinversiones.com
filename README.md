@@ -59,7 +59,7 @@ Buscar el comentario `PENDIENTE` en los archivos para ubicar rápidamente cada u
 |---|---|
 | `assets/img/logo-icon.svg` | Es una **reconstrucción vectorial** hecha a partir del logo en baja resolución encontrado en las firmas de correo (`Pie_de_Firma_*.png`). Si aparece el archivo original en alta resolución o vectorial (SVG/AI/PDF), reemplazar este archivo (y `logo-icon-on-dark.svg`, su variante para fondos oscuros). |
 | `index.html` → hero | Reemplazar la tarjeta "Depto 2D/2B · Ñuñoa" por una foto real de un proyecto destacado. |
-| `index.html` → sección Aliados | Los `ally-name` son texto plano; reemplazar por logos reales (PNG/SVG) de cada inmobiliaria, banco y mutuaria cuando estén disponibles (están en Drive según lo conversado). |
+| `assets/logos/*` | Logos reales de aliados descargados de sus sitios oficiales / Wikimedia Commons (no son archivos entregados por DIDI). Si la empresa tiene una versión en mejor calidad o pide que se use otra, reemplazar el archivo correspondiente. |
 | `index.html` → Testimonios | Son placeholders (`[PLACEHOLDER]`) — reemplazar por testimonios reales (nombre, cargo, frase). |
 | `index.html` → footer | Confirmar si aplica una dirección/comuna exacta de oficina (hoy solo dice "Santiago, Chile"). |
 | `netlify/functions/chat.js` | Requiere `ANTHROPIC_API_KEY` configurada en Netlify (ver arriba) para funcionar. |

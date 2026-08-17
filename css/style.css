@@ -629,7 +629,7 @@ h1, h2, h3, h4 {
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: 56px;
+  gap: 20px;
   width: max-content;
   animation: marquee 32s linear infinite;
 }
@@ -641,13 +641,27 @@ h1, h2, h3, h4 {
   to { transform: translateX(-50%); }
 }
 
-.ally-name {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 1.5rem;
-  color: var(--gray);
-  white-space: nowrap;
+.ally-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  padding: 0 26px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
 }
+
+.ally-logo img {
+  max-height: 32px;
+  max-width: 150px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Un par de logos (Siena, Delabase) son blancos puros — necesitan fondo oscuro para verse */
+.ally-logo--dark { background: var(--navy); }
 
 /* ---------- Cómo funciona (timeline horizontal en desktop) ---------- */
 .process {
