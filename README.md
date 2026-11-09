@@ -51,6 +51,13 @@ netlify dev
 
 La API key **nunca se expone en el navegador** — solo la usa `netlify/functions/chat.js`, que corre en el servidor.
 
+### Protección del endpoint
+
+`netlify/functions/chat.js` solo acepta peticiones cuyo `Origin`/`Referer` sea
+`didinversiones.com`, `www.didinversiones.com`, `localhost` o un preview `*.netlify.app`
+(constante `ALLOWED_HOSTS`). Si el dominio del sitio cambia, hay que actualizar esa lista.
+Además corta conversaciones de más de 40 mensajes para limitar abuso de la API.
+
 ## Pendientes marcados en el código
 
 Buscar el comentario `PENDIENTE` en los archivos para ubicar rápidamente cada uno:
@@ -62,7 +69,7 @@ Buscar el comentario `PENDIENTE` en los archivos para ubicar rápidamente cada u
 | `assets/logos/*` | Logos reales de aliados descargados de sus sitios oficiales / Wikimedia Commons (no son archivos entregados por DIDI). Si la empresa tiene una versión en mejor calidad o pide que se use otra, reemplazar el archivo correspondiente. |
 | `index.html` → Testimonios | Son placeholders (`[PLACEHOLDER]`) — reemplazar por testimonios reales (nombre, cargo, frase). |
 | `index.html` → footer | Confirmar si aplica una dirección/comuna exacta de oficina (hoy solo dice "Santiago, Chile"). |
-| `netlify/functions/chat.js` | Requiere `ANTHROPIC_API_KEY` configurada en Netlify (ver arriba) para funcionar. |
+| `netlify/functions/chat.js` | **Único paso pendiente del chatbot:** configurar `ANTHROPIC_API_KEY` en Netlify (ver arriba). Sin ella, el widget muestra "el asistente se está activando" y ofrece WhatsApp/Calendly. |
 
 ## Notas de diseño
 

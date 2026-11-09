@@ -18,10 +18,38 @@
   if (!launcher || !panel || !form) return;
 
   var ENDPOINT = "/.netlify/functions/chat";
+  var STORAGE_KEY = "didi-chat-history";
   var history = []; // [{ role: "user" | "assistant", content: "..." }]
   var isOpen = false;
   var isSending = false;
   var hasGreeted = false;
+
+  /* ---------- Persistencia (sessionStorage) ---------- */
+  function saveHistory() {
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    } catch (err) {
+      /* modo privado o storage lleno: seguimos sin persistir */
+    }
+  }
+
+  function loadHistory() {
+    try {
+      var raw = window.sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return;
+      parsed.forEach(function (m) {
+        if (!m || (m.role !== "user" && m.role !== "assistant") || typeof m.content !== "string") return;
+        history.push({ role: m.role, content: m.content });
+        if (m.role === "user") addUserMessage(m.content);
+        else addBotMessage(m.content);
+      });
+      if (history.length) hasGreeted = true;
+    } catch (err) {
+      /* historial corrupto: empezamos limpio */
+    }
+  }
 
   /* ---------- Abrir / cerrar panel ---------- */
   launcher.addEventListener("click", function () {
@@ -29,6 +57,12 @@
     panel.classList.toggle("is-open", isOpen);
     launcher.classList.toggle("is-open", isOpen);
     launcher.setAttribute("aria-expanded", String(isOpen));
+
+    // El punto dorado de "mensaje nuevo" ya cumplió su función.
+    if (isOpen) {
+      var ping = launcher.querySelector(".ping");
+      if (ping) ping.remove();
+    }
 
     if (isOpen && !hasGreeted) {
       hasGreeted = true;
@@ -116,6 +150,10 @@
     if (el) el.remove();
   }
 
+  var FALLBACK_CONTACT =
+    "puedes escribirle directo a Diego por [WhatsApp](https://wa.me/56999641973) " +
+    "o [agendar una asesoría](https://calendly.com/diegodiaz-didinversiones/inversion-inmobiliaria).";
+
   /* ---------- Envío al backend ---------- */
   function sendMessage(text) {
     if (isSending) return;
@@ -123,6 +161,7 @@
 
     addUserMessage(text);
     history.push({ role: "user", content: text });
+    saveHistory();
     showTyping();
 
     fetch(ENDPOINT, {
@@ -131,25 +170,42 @@
       body: JSON.stringify({ messages: history })
     })
       .then(function (res) {
-        if (!res.ok) throw new Error("Respuesta no válida (" + res.status + ")");
-        return res.json();
+        return res.json().catch(function () { return {}; }).then(function (data) {
+          return { ok: res.ok, status: res.status, data: data };
+        });
       })
-      .then(function (data) {
+      .then(function (result) {
         hideTyping();
-        var reply = (data && data.reply) || "";
-        if (!reply) throw new Error("Respuesta vacía");
+
+        if (!result.ok) {
+          if (result.status === 503 || (result.data && result.data.code === "not_configured")) {
+            addBotMessage(
+              "El asistente se está activando en este momento. Mientras tanto, " + FALLBACK_CONTACT
+            );
+          } else {
+            addBotMessage("Tuve un problema para responder. Mientras lo reviso, " + FALLBACK_CONTACT);
+          }
+          return;
+        }
+
+        var reply = (result.data && result.data.reply) || "";
+        if (!reply) {
+          addBotMessage("Tuve un problema para responder. Mientras lo reviso, " + FALLBACK_CONTACT);
+          return;
+        }
         addBotMessage(reply);
         history.push({ role: "assistant", content: reply });
+        saveHistory();
       })
       .catch(function () {
         hideTyping();
-        addBotMessage(
-          "Se me cortó la conexión 😅 Mientras lo resolvemos, puedes escribirle directo a Diego por " +
-            "[WhatsApp](https://wa.me/56999641973) o [agendar una asesoría](https://calendly.com/diegodiaz-didinversiones/inversion-inmobiliaria)."
-        );
+        addBotMessage("Se me cortó la conexión 😅 Mientras lo resolvemos, " + FALLBACK_CONTACT);
       })
       .finally(function () {
         isSending = false;
       });
   }
+
+  /* ---------- Init: restaura conversación de esta sesión ---------- */
+  loadHistory();
 })();

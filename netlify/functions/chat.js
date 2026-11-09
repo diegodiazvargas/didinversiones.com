@@ -14,6 +14,32 @@ const MODEL = process.env.ANTHROPIC_MODEL || "claude-sonnet-5";
 
 const MAX_HISTORY_MESSAGES = 16; // últimos N mensajes que se reenvían como contexto
 const MAX_MESSAGE_LENGTH = 1200; // caracteres por mensaje de usuario
+const MAX_TOTAL_MESSAGES = 40;   // corta conversaciones anormalmente largas (abuso)
+
+// Solo se aceptan peticiones que vengan del propio sitio. Reduce el abuso del
+// endpoint público (alguien llamándolo en loop y disparando el costo de API).
+// En local con `netlify dev` no hay Origin/Referer de un dominio real, así que
+// también se permite cuando el host es localhost.
+const ALLOWED_HOSTS = [
+  "didinversiones.com",
+  "www.didinversiones.com",
+  "localhost",
+  "127.0.0.1"
+];
+
+function isAllowedOrigin(event) {
+  const ref = event.headers.origin || event.headers.referer || event.headers.Referer || "";
+  if (!ref) return false;
+  try {
+    const host = new URL(ref).hostname;
+    if (ALLOWED_HOSTS.includes(host)) return true;
+    // Previews de Netlify: *.netlify.app
+    if (host.endsWith(".netlify.app")) return true;
+    return false;
+  } catch (err) {
+    return false;
+  }
+}
 
 const SYSTEM_PROMPT = `Eres Dani, la asistente virtual de DIDI Inversiones, un bróker de inversión inmobiliaria en Santiago, Chile.
 
@@ -44,12 +70,19 @@ exports.handler = async (event) => {
     return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
+  if (!isAllowedOrigin(event)) {
+    return { statusCode: 403, body: JSON.stringify({ error: "Origen no permitido" }) };
+  }
+
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     console.error("Falta ANTHROPIC_API_KEY en las variables de entorno de Netlify.");
     return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "El chatbot no está configurado todavía." })
+      statusCode: 503,
+      body: JSON.stringify({
+        error: "El chatbot se está activando. Vuelve a intentarlo en un rato.",
+        code: "not_configured"
+      })
     };
   }
 
@@ -63,6 +96,12 @@ exports.handler = async (event) => {
   const incoming = Array.isArray(payload.messages) ? payload.messages : [];
   if (!incoming.length) {
     return { statusCode: 400, body: JSON.stringify({ error: "Falta el mensaje" }) };
+  }
+  if (incoming.length > MAX_TOTAL_MESSAGES) {
+    return {
+      statusCode: 429,
+      body: JSON.stringify({ error: "Conversación demasiado larga. Recárgala para empezar de nuevo." })
+    };
   }
 
   // Sanitiza y acota el historial: solo role/content de texto, largo limitado.
