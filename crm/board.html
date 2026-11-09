@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>DIDI CRM — Pipeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/crm.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <h1 class="brand">DIDI <span>CRM</span></h1>
+      <div class="topbar-controls">
+        <input type="search" id="search-input" placeholder="Buscar por nombre, teléfono, propiedad..." />
+        <select id="vendor-filter">
+          <option value="">Todos los vendedores</option>
+        </select>
+        <button class="btn btn-gold" id="new-lead-btn">+ Nuevo lead</button>
+      </div>
+      <div class="topbar-controls">
+        <span class="user-pill">
+          <span class="avatar" id="user-avatar">--</span>
+          <span id="user-name">Cargando...</span>
+        </span>
+        <button class="btn btn-ghost" id="logout-btn">Salir</button>
+      </div>
+    </header>
+
+    <main class="board-wrap">
+      <div class="board" id="board"></div>
+    </main>
+  </div>
+
+  <!-- Modal: completar perfil (primer ingreso) -->
+  <div class="modal-overlay" id="profile-modal" hidden>
+    <div class="modal">
+      <h3>Bienvenido/a a DIDI CRM</h3>
+      <p style="color:var(--gray); font-size:0.88rem; margin-bottom:16px;">Antes de empezar, dinos tu nombre para identificarte en el pipeline.</p>
+      <form id="profile-form">
+        <div class="field">
+          <label for="profile-name">Tu nombre</label>
+          <input type="text" id="profile-name" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Continuar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: crear/editar lead -->
+  <div class="modal-overlay" id="lead-modal" hidden>
+    <div class="modal" style="position:relative;">
+      <button class="modal-close" id="lead-modal-close" aria-label="Cerrar">&times;</button>
+      <h3 id="lead-modal-title">Nuevo lead</h3>
+      <form id="lead-form">
+        <input type="hidden" id="lead-id" />
+        <div class="modal-grid">
+          <div class="field full">
+            <label for="lead-name">Nombre *</label>
+            <input type="text" id="lead-name" required />
+          </div>
+          <div class="field">
+            <label for="lead-phone">Teléfono</label>
+            <input type="text" id="lead-phone" />
+          </div>
+          <div class="field">
+            <label for="lead-email">Correo</label>
+            <input type="email" id="lead-email" />
+          </div>
+          <div class="field full">
+            <label for="lead-property">Propiedad de interés</label>
+            <input type="text" id="lead-property" placeholder="Ej: Depto 2D1B Ñuñoa, UF 3.200" />
+          </div>
+          <div class="field">
+            <label for="lead-budget">Presupuesto (UF)</label>
+            <input type="number" id="lead-budget" step="0.1" />
+          </div>
+          <div class="field">
+            <label for="lead-source">Fuente</label>
+            <input type="text" id="lead-source" placeholder="Instagram, referido, web..." />
+          </div>
+          <div class="field">
+            <label for="lead-stage">Etapa</label>
+            <select id="lead-stage"></select>
+          </div>
+          <div class="field">
+            <label for="lead-assigned">Asignado a</label>
+            <select id="lead-assigned"></select>
+          </div>
+          <div class="field">
+            <label for="lead-next-action">Próxima acción</label>
+            <input type="date" id="lead-next-action" />
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-danger" id="delete-lead-btn" hidden>Eliminar</button>
+          <div class="right">
+            <button type="button" class="btn btn-ghost" id="cancel-lead-btn">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="save-lead-btn">Guardar</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="activity-list" id="activity-section" hidden>
+        <h3 style="font-size:1rem; margin-bottom:8px;">Actividad</h3>
+        <div id="activity-items"></div>
+        <div class="activity-add">
+          <textarea id="activity-note" placeholder="Agregar una nota..."></textarea>
+          <button class="btn btn-gold" id="add-activity-btn">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/board.js"></script>
+</body>
+</html>
