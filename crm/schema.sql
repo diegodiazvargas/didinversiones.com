@@ -31,6 +31,9 @@ create table if not exists public.leads (
   assigned_to uuid references public.profiles(id) on delete set null,
   notes text,
   next_action_date date,
+  commission_didi numeric,
+  commission_jose numeric,
+  commission_nico numeric,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

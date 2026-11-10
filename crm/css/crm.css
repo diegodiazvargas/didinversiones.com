@@ -276,7 +276,44 @@ input, select, textarea { font-family: var(--font-body); }
 .activity-add { display: flex; gap: 8px; margin-top: 10px; }
 .activity-add textarea { flex: 1; resize: vertical; min-height: 40px; }
 
+/* ---------- Dashboard ---------- */
+.dashboard-wrap { flex: 1; overflow-y: auto; padding: 24px 28px; }
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.kpi-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.kpi-label { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.04em; }
+.kpi-value { font-family: var(--font-heading); font-size: 1.8rem; color: var(--navy); }
+.kpi-sub { font-size: 0.78rem; color: var(--gold-dark); min-height: 16px; }
+
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dash-panel {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+}
+.dash-panel.full { grid-column: 1 / -1; }
+.dash-panel h3 { font-size: 1rem; color: var(--navy); margin-bottom: 14px; }
+
+.bar-row { display: grid; grid-template-columns: 100px 1fr 90px; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.85rem; }
+.bar-label { color: var(--navy-deep); }
+.bar-track { background: var(--cream-dark); border-radius: 999px; height: 10px; overflow: hidden; }
+.bar-fill { background: var(--gold); height: 100%; border-radius: 999px; }
+.bar-value { text-align: right; color: var(--gray); font-size: 0.8rem; }
+
+.dash-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.dash-table th, .dash-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.dash-table th { color: var(--gray); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; }
+
 @media (max-width: 720px) {
+  .dash-grid { grid-template-columns: 1fr; }
   .modal-grid { grid-template-columns: 1fr; }
   .topbar { flex-direction: column; align-items: stretch; }
 }

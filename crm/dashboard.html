@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>DIDI CRM — Resumen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/crm.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <h1 class="brand">DIDI <span>CRM</span></h1>
+      <div class="topbar-controls">
+        <a href="board.html" class="btn btn-ghost" style="color:#fff; border-color: rgba(255,255,255,0.3);">← Tablero</a>
+        <span style="font-weight:600;">Resumen de ventas</span>
+      </div>
+      <div class="topbar-controls">
+        <span class="user-pill">
+          <span class="avatar" id="user-avatar">--</span>
+          <span id="user-name">Cargando...</span>
+        </span>
+        <button class="btn btn-ghost" id="logout-btn">Salir</button>
+      </div>
+    </header>
+
+    <main class="dashboard-wrap">
+      <section class="kpi-row" id="kpi-row">
+        <div class="kpi-card">
+          <span class="kpi-label">UF vendidas 2026</span>
+          <span class="kpi-value" id="kpi-uf">—</span>
+          <span class="kpi-sub" id="kpi-uf-sub"></span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Ventas activas</span>
+          <span class="kpi-value" id="kpi-count">—</span>
+          <span class="kpi-sub">reserva → arriendo</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Escrituradas</span>
+          <span class="kpi-value" id="kpi-escrituradas">—</span>
+          <span class="kpi-sub" id="kpi-escrituradas-sub"></span>
+        </div>
+      </section>
+
+      <section class="dash-grid">
+        <div class="dash-panel">
+          <h3>Comisiones por persona (CLP)</h3>
+          <div id="comision-bars"></div>
+        </div>
+
+        <div class="dash-panel">
+          <h3>Ventas por etapa (Hito 2)</h3>
+          <div id="stage-bars"></div>
+        </div>
+
+        <div class="dash-panel full">
+          <h3>Ventas por mes</h3>
+          <table class="dash-table" id="month-table">
+            <thead>
+              <tr><th>Mes</th><th>N° ventas</th><th>UF</th><th>Comisión DIDI</th><th>Comisión Jose</th><th>Comisión Nico</th></tr>
+            </thead>
+            <tbody id="month-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
