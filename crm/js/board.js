@@ -101,7 +101,12 @@ function initials(name) {
 
 function populateStageSelect() {
   const sel = document.getElementById("lead-stage");
-  sel.innerHTML = STAGES.map((s) => `<option value="${s.key}">${s.label}</option>`).join("");
+  sel.innerHTML = HITOS.map((hito) => {
+    const options = STAGES.filter((s) => s.hito === hito.key)
+      .map((s) => `<option value="${s.key}">${s.label}</option>`)
+      .join("");
+    return `<optgroup label="${hito.label}">${options}</optgroup>`;
+  }).join("");
 }
 
 function populateVendorSelects() {
@@ -130,7 +135,8 @@ function getFilteredLeads() {
 
 function renderBoard() {
   const filtered = getFilteredLeads();
-  boardEl.innerHTML = STAGES.map((stage) => {
+
+  function renderColumn(stage) {
     const stageLeads = filtered.filter((l) => l.stage === stage.key);
     return `
       <section class="column" data-stage="${stage.key}">
@@ -146,6 +152,19 @@ function renderBoard() {
           }
         </div>
       </section>
+    `;
+  }
+
+  boardEl.innerHTML = HITOS.map((hito) => {
+    const hitoStages = STAGES.filter((s) => s.hito === hito.key);
+    const hitoTotal = filtered.filter((l) => hitoStages.some((s) => s.key === l.stage)).length;
+    return `
+      <div class="hito-group">
+        <div class="hito-label">${hito.label} <span class="hito-count">${hitoTotal}</span></div>
+        <div class="hito-columns">
+          ${hitoStages.map(renderColumn).join("")}
+        </div>
+      </div>
     `;
   }).join("");
 

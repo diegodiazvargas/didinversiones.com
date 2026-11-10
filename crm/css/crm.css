@@ -158,11 +158,42 @@ input, select, textarea { font-family: var(--font-body); }
 /* ---------- Board ---------- */
 .board-wrap { flex: 1; overflow-x: auto; padding: 18px 24px; }
 .board {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  min-height: calc(100vh - 150px);
+}
+.hito-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 22px;
+  border-right: 2px solid var(--border);
+}
+.hito-group:last-child { border-right: none; padding-right: 0; }
+.hito-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.01em;
+}
+.hito-count {
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+}
+.hito-columns {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(250px, 1fr);
+  grid-auto-columns: minmax(230px, 1fr);
   gap: 14px;
-  min-height: calc(100vh - 150px);
 }
 .column {
   background: var(--cream-dark);

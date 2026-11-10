@@ -21,7 +21,12 @@ create table if not exists public.leads (
   budget numeric,
   source text,
   stage text not null default 'lead' check (
-    stage in ('lead', 'reunion', 'reserva', 'aprobacion', 'promesa', 'escritura', 'arriendo')
+    stage in (
+      -- Hito 1: calificación del lead
+      'lead', 'contacto', 'volver_a_llamar', 'agendado', 'no_contesta_malo', 'asesoria_ok',
+      -- Hito 2: cierre de la operación
+      'reserva', 'documentos', 'aprobacion', 'promesa', 'escritura', 'factura', 'arriendo'
+    )
   ),
   assigned_to uuid references public.profiles(id) on delete set null,
   notes text,
