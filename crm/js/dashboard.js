@@ -24,18 +24,19 @@ async function init() {
 
   const hito2Stages = STAGES.filter((s) => s.hito === 2).map((s) => s.key);
 
-  const { data: leads, error } = await supabaseClient
-    .from("leads")
-    .select("stage, budget, commission_didi, commission_jose, commission_nico, created_at")
-    .in("stage", hito2Stages);
+  const { data: allLeads, error } = await supabaseClient.rpc("get_commission_summary");
 
   if (error) {
     document.querySelector(".dashboard-wrap").innerHTML = `<p style="color:#B3261E;">No se pudo cargar el resumen: ${error.message}</p>`;
     return;
   }
 
+  const leads = allLeads.filter((l) => hito2Stages.includes(l.stage));
+
+  const visibility = { canSeeAll: profile?.role === "admin", myKey: profile?.commission_key || null };
+
   renderKpis(leads, hito2Stages);
-  renderCommissionBars(leads);
+  renderCommissionBars(leads, visibility);
   renderStageBars(leads, hito2Stages);
   renderMonthTable(leads);
 }
@@ -82,14 +83,23 @@ function renderBarList(container, items, formatValue) {
     .join("");
 }
 
-function renderCommissionBars(leads) {
-  const totals = { "DIDI": 0, "Jose": 0, "Nico": 0 };
-  leads.forEach((l) => {
-    totals["DIDI"] += Number(l.commission_didi) || 0;
-    totals["Jose"] += Number(l.commission_jose) || 0;
-    totals["Nico"] += Number(l.commission_nico) || 0;
-  });
-  const items = Object.entries(totals).map(([label, value]) => ({ label, value }));
+function renderCommissionBars(leads, visibility) {
+  const keys = [
+    { key: "didi", label: "DIDI" },
+    { key: "jose", label: "Jose" },
+    { key: "nico", label: "Nico" },
+  ];
+  const visibleKeys = visibility.canSeeAll ? keys : keys.filter((k) => k.key === visibility.myKey);
+
+  if (!visibleKeys.length) {
+    document.getElementById("comision-bars").innerHTML = `<p style="color:var(--gray); font-size:0.85rem;">No tienes comisiones asociadas todavía.</p>`;
+    return;
+  }
+
+  const items = visibleKeys.map((k) => ({
+    label: k.label,
+    value: leads.reduce((sum, l) => sum + (Number(l[`commission_${k.key}`]) || 0), 0),
+  }));
   renderBarList(document.getElementById("comision-bars"), items, fmtCLP);
 }
 

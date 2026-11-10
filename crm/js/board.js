@@ -75,7 +75,9 @@ async function loadProfiles() {
 async function loadLeads() {
   const { data, error } = await supabaseClient
     .from("leads")
-    .select("*, assignee:assigned_to(full_name)")
+    .select(
+      "id, name, phone, email, property_interest, budget, source, stage, assigned_to, notes, next_action_date, created_at, updated_at, assignee:assigned_to(full_name)"
+    )
     .order("created_at", { ascending: false });
   if (error) {
     console.error(error);
@@ -175,7 +177,7 @@ function renderCard(lead) {
   const vendorName = lead.assignee?.full_name || "Sin asignar";
   const days = daysSince(lead.updated_at || lead.created_at);
   return `
-    <article class="lead-card" draggable="true" data-id="${lead.id}">
+    <article class="lead-card" draggable="true" data-id="${lead.id}" data-stage="${lead.stage}">
       <div class="lead-name">${escapeHtml(lead.name)}</div>
       <div class="lead-meta">${escapeHtml(lead.property_interest || lead.phone || "")}</div>
       <div class="lead-foot">

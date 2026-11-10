@@ -8,6 +8,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text not null,
   role text not null default 'vendedor' check (role in ('admin', 'vendedor')),
+  commission_key text check (commission_key in ('didi', 'jose', 'nico')),
   created_at timestamptz not null default now()
 );
 
@@ -23,7 +24,7 @@ create table if not exists public.leads (
   stage text not null default 'lead' check (
     stage in (
       -- Hito 1: calificación del lead
-      'lead', 'contacto', 'volver_a_llamar', 'agendado', 'no_contesta_malo', 'asesoria_ok',
+      'lead', 'contacto', 'volver_a_llamar', 'agendado', 'no_contesta_malo', 'asesoria_ok', 'descartado',
       -- Hito 2: cierre de la operación
       'reserva', 'documentos', 'aprobacion', 'promesa', 'escritura', 'factura', 'arriendo'
     )
@@ -107,3 +108,40 @@ drop trigger if exists leads_set_updated_at on public.leads;
 create trigger leads_set_updated_at
   before update on public.leads
   for each row execute function public.set_updated_at();
+
+-- ============================================================
+-- Comisiones: cada vendedor ve solo la suya, admin las ve todas.
+-- Las columnas commission_* se ocultan a nivel de tabla y solo se
+-- entregan a través de get_commission_summary(), que las enmascara
+-- según quién pregunta (auth.uid()).
+-- ============================================================
+
+create or replace function public.can_see_commission(key text)
+returns boolean
+language sql stable security definer set search_path = public
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and (role = 'admin' or commission_key = key)
+  );
+$$;
+
+create or replace function public.get_commission_summary()
+returns table (
+  id uuid, stage text, budget numeric, created_at timestamptz,
+  commission_didi numeric, commission_jose numeric, commission_nico numeric
+)
+language sql stable security definer set search_path = public
+as $$
+  select
+    l.id, l.stage, l.budget, l.created_at,
+    case when public.can_see_commission('didi') then l.commission_didi else null end,
+    case when public.can_see_commission('jose') then l.commission_jose else null end,
+    case when public.can_see_commission('nico') then l.commission_nico else null end
+  from public.leads l;
+$$;
+
+grant execute on function public.can_see_commission(text) to authenticated;
+grant execute on function public.get_commission_summary() to authenticated;
+
+revoke select (commission_didi, commission_jose, commission_nico) on public.leads from authenticated, anon;

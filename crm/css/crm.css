@@ -240,6 +240,7 @@ input, select, textarea { font-family: var(--font-body); }
 .lead-card .lead-meta { font-size: 0.78rem; color: var(--gray); margin-bottom: 6px; }
 .lead-card .lead-foot { display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: var(--gray); }
 .lead-card .lead-days { background: var(--cream-dark); padding: 1px 7px; border-radius: 999px; }
+.lead-card[data-stage="descartado"] { border-left-color: var(--gray); opacity: 0.7; }
 
 /* ---------- Modal ---------- */
 .modal-overlay {

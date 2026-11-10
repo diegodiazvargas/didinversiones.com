@@ -15,6 +15,7 @@ const STAGES = [
   { key: "agendado", label: "Agendado", hito: 1 },
   { key: "no_contesta_malo", label: "No contesta / Malo", hito: 1 },
   { key: "asesoria_ok", label: "Asesoría OK", hito: 1 },
+  { key: "descartado", label: "Descartado", hito: 1 },
   // Hito 2: cierre de la operación
   { key: "reserva", label: "Reserva", hito: 2 },
   { key: "documentos", label: "Documentos", hito: 2 },
