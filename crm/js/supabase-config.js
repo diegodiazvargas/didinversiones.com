@@ -2,8 +2,8 @@
 // Los encuentras en: Supabase → tu proyecto → Settings → API.
 // El "anon public key" está hecho para usarse en el navegador (no es secreto);
 // el acceso real a los datos lo controla Row Level Security (ver schema.sql).
-const SUPABASE_URL = "https://TU-PROYECTO.supabase.co";
-const SUPABASE_ANON_KEY = "TU-ANON-PUBLIC-KEY";
+const SUPABASE_URL = "https://nuxrrllkomvsmydaxgkb.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_JQpxVJrMufSsnuLdlr29QA_N7gXJbkq";
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
